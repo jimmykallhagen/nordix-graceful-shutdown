@@ -139,13 +139,13 @@ systemctl status nordix-graceful-shutdown.socket
 The following values are defined at the top of `nordix-graceful-shutdown.c` and can be adjusted before building:
 
 | Define | Default | Description |
-|----------------------|------------------------------------------------------------------------------
-| `CONNECTION_MBIT`    | `100.0`                                       | Internet connection speed in Mbit/s 
-| `DOWNLOAD_THRESHOLD` | `0.40`                                        | Fraction of connection speed that triggers the download popup
-| `POPUP_SCRUB_TRIM`   | `/usr/lib/nordix/nordix-shutdown-scrub.py`    | Path to scrub/trim popup script
-| `POPUP_VM`           | `/usr/lib/nordix/nordix-shutdown-vm.py`       | Path to VM popup script
-| `POPUP_DOWNLOAD`     | `/usr/lib/nordix/nordix-shutdown-download.py` | Path to download popup script
-| `SOCKET_PATH`        | `/run/nordix-graceful-shutdown.sock`          | Unix socket path
+|----------------------|----------------------------------------------------------------------------------------------------------------|
+| `CONNECTION_MBIT`    | `100.0`                                       | Internet connection speed in Mbit/s |
+| `DOWNLOAD_THRESHOLD` | `0.40`                                        | Fraction of connection speed that triggers the download popup |
+| `POPUP_SCRUB_TRIM`   | `/usr/lib/nordix/nordix-shutdown-scrub.py`    | Path to scrub/trim popup script |
+| `POPUP_VM`           | `/usr/lib/nordix/nordix-shutdown-vm.py`       | Path to VM popup script |
+| `POPUP_DOWNLOAD`     | `/usr/lib/nordix/nordix-shutdown-download.py` | Path to download popup script |
+| `SOCKET_PATH`        | `/run/nordix-graceful-shutdown.sock`          | Unix socket path |
 
 The ZFS dataset lists (steps 9–12) are defined as static arrays in the source and should be edited to match your pool layout.
 
