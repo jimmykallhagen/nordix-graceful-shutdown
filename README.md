@@ -1,4 +1,3 @@
-[README.md](https://github.com/user-attachments/files/25815745/README.md)
 # Nordix Graceful Shutdown
 
 A shutdown manager for [Nordix](https://github.com/nordix) - an Arch Linux-based distro with ZFS on root and aggressive cache tuning.
