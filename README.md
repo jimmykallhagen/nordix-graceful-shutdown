@@ -1,5 +1,9 @@
 # Nordix Graceful Shutdown
 
+**Part of:** [Nordix](https://github.com/jimmykallhagen/Nordix)  
+**Author:** Jimmy Källhagen  
+**License:** GPL-3.0-or-later
+
 A shutdown manager for [Nordix](https://github.com/nordix) - an Arch Linux-based distro with ZFS on root and aggressive cache tuning.
 
 ## Why this exists
@@ -157,12 +161,5 @@ The ZFS dataset lists (steps 9–12) are defined as static arrays in the source 
 - libvirt/virsh (optional — VM check is skipped if not installed)
 - Docker/Podman (optional — container stop is skipped if not installed)
 
-## License
----
- * SPDX-License-Identifier: PolyForm-Noncommercial-1.0.0                            
- * [**Nordix - license**](https://polyformproject.org/licenses/noncommercial/1.0.0) 
- * Copyright (c) 2025 Jimmy Källhagen                                               
- * Part of Nordix - https://github.com/jimmykallhagen/Nordix                        
- * Nordix and Yggdrasil are trademarks of Jimmy Källhagen 
 
 ---
