@@ -20,20 +20,20 @@ A standard `systemctl poweroff` can lead to data loss or corruption when:
 This shutdown manager solves these problems by performing a careful, ordered teardown of the entire system before handing off to `systemctl poweroff` or `systemctl reboot`.
 
 ## Shutdown sequence:
-  *-*  **1.** sync + zpool sync           (flush RAM → disk)
-  *  **2.** Check scrub/resilver/trim   (popup: wait / pause / cancel)
-  *  **3.** Check running VMs           (popup: continue / cancel)
-  *  **4.** Check active downloads      (popup: wait / ignore / cancel)
-  *  **5.** Stop important services     (docker, podman, databases, etc.)
-  *  **6.** Stop AppImages + unmount FUSE
-  *  **7.** sync + zpool sync again
-  *  **8.** Logout user
-  *  **9.** Unmount steam children
-  * **10.** Unmount .local children
-  * **11.** Unmount home children
-  * **12.** Unmount root children
-  * **13.** zfs umount -af              (force-unmount any stragglers)
-  * **14.** poweroff / reboot
+ > *  **1.** sync + zpool sync - (flush RAM → disk)
+ > *  **2.** Check scrub/resilver/trim - (popup: wait / pause / cancel)
+ > *  **3.** Check running VMs - (popup: continue / cancel)
+ > *  **4.** Check active downloads - (popup: wait / ignore / cancel)
+ > *  **5.** Stop important services - (docker, podman, databases, etc.)
+ > *  **6.** Stop AppImages + unmount FUSE
+ > *  **7.** sync + zpool sync again
+ > *  **8.** Logout user
+ > *  **9.** Unmount steam children
+ > * **10.** Unmount .local children
+ > * **11.** Unmount home children
+ > * **12.** Unmount root children
+ > * **13.** zfs umount -af - (force-unmount any stragglers)
+ > * **14.** poweroff / reboot
 ---
 
 ## Architecture
