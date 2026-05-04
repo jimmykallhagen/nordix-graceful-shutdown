@@ -19,6 +19,7 @@ A standard `systemctl poweroff` can lead to data loss or corruption when:
 
 This shutdown manager solves these problems by performing a careful, ordered teardown of the entire system before handing off to `systemctl poweroff` or `systemctl reboot`.
 
+---
 ## Shutdown sequence:
  > *  **1.** sync + zpool sync - (flush RAM → disk)
  > *  **2.** Check scrub/resilver/trim - (popup: wait / pause / cancel)
