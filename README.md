@@ -20,14 +20,18 @@ A standard `systemctl poweroff` can lead to data loss or corruption when:
 This shutdown manager solves these problems by performing a careful, ordered teardown of the entire system before handing off to `systemctl poweroff` or `systemctl reboot`.
 
 ---
+## Fast shutdown/reboot
+> nordix-gracefully-shotdown ensures that you get the fastest possible shutdown/reboot because it performs the correct procedure directly to handle shutting down processes and programs as well as unmounting datasets and other extra mounts that are not standard in a GNU/Linux system, which would otherwise cause your shutdown/reboot sequence to hang until a timeout occurs.
+
+---
 ## Shutdown sequence:
- > *  **1.** sync + zpool sync - (flush RAM → disk)
+ > *  **1.** sync + zpool sync - (flush RAM --> disk)
  > *  **2.** Check scrub/resilver/trim - (popup: wait / pause / cancel)
  > *  **3.** Check running VMs - (popup: continue / cancel)
  > *  **4.** Check active downloads - (popup: wait / ignore / cancel)
  > *  **5.** Stop important services - (docker, podman, databases, etc.)
  > *  **6.** Stop AppImages + unmount FUSE
- > *  **7.** sync + zpool sync again
+ > *  **7.** sync + zpool sync again - (flush RAM --> disk)
  > *  **8.** Logout user
  > *  **9.** Unmount steam children
  > * **10.** Unmount .local children
