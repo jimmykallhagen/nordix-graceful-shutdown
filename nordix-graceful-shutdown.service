@@ -17,7 +17,7 @@ After=zfs.target
 
 [Service]
 Type=simple
-ExecStart=/usr/lib/nordix/nordix-graceful-shutdown
+ExecStart=/usr/lib/nordix/nordix-graceful-shutdown/nordix-graceful-shutdown
 Restart=on-failure
 RestartSec=2
 
