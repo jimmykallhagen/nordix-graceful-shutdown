@@ -40,8 +40,9 @@ This shutdown manager solves these problems by performing a careful, ordered tea
   * 12. Unmount root children
   * 13. zfs umount -af - (force-unmount any stragglers)
   * 14. poweroff / reboot
----
+
 ```
+---
 ## Architecture
 
 ```
