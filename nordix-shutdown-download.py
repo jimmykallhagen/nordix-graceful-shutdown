@@ -75,7 +75,7 @@ def measure_speed_mbit(iface):
 
 class DownloadDialog(Gtk.Window):
     def __init__(self):
-        super().__init__(title="Nordix Shutdown")
+        super().__init__(title="Nordix Graceful Shutdown")
         self.set_default_size(520, 300)
         self.set_position(Gtk.WindowPosition.CENTER)
         self.set_resizable(False)
@@ -97,14 +97,14 @@ class DownloadDialog(Gtk.Window):
         vbox.pack_start(icon, False, False, 0)
 
         header = Gtk.Label()
-        header.set_markup("<big><b>Aktiv nedladdning pågår</b></big>")
+        header.set_markup("<big><b>Active download in progress</b></big>")
         vbox.pack_start(header, False, False, 0)
 
         info = Gtk.Label()
         info.set_markup(
-            f"Nedladdningshastighet: <b>{SPEED} Mbit/s</b>\n\n"
-            "En nedladdning upptäcktes som överstiger tröskelvärdet.\n"
-            "Välj hur du vill fortsätta:"
+            f"Download speed: <b>{SPEED} Mbit/s</b>\n\n"
+             "A download exceeding the threshold was detected.\n"
+             "Choose how to proceed:"
         )
         info.set_line_wrap(True)
         info.set_justify(Gtk.Justification.CENTER)
@@ -122,16 +122,16 @@ class DownloadDialog(Gtk.Window):
         btn_box.set_halign(Gtk.Align.CENTER)
         vbox.pack_end(btn_box, False, False, 0)
 
-        btn_wait = Gtk.Button(label="Vänta tills klar")
+        btn_wait = Gtk.Button(label="Wait until done")
         btn_wait.get_style_context().add_class("suggested-action")
         btn_wait.connect("clicked", self.on_wait)
         btn_box.pack_start(btn_wait, False, False, 0)
 
-        btn_ignore = Gtk.Button(label="Fortsätt ändå")
+        btn_ignore = Gtk.Button(label="Keep going anyway")
         btn_ignore.connect("clicked", self.on_ignore)
         btn_box.pack_start(btn_ignore, False, False, 0)
 
-        btn_cancel = Gtk.Button(label="Avbryt shutdown")
+        btn_cancel = Gtk.Button(label="Cancel shutdown")
         btn_cancel.get_style_context().add_class("destructive-action")
         btn_cancel.connect("clicked", self.on_cancel)
         btn_box.pack_start(btn_cancel, False, False, 0)
@@ -142,8 +142,8 @@ class DownloadDialog(Gtk.Window):
 
     def on_wait(self, _btn):
         self.status_label.set_markup(
-            "<i>Väntar på att nedladdningen ska bli klar...</i>\n"
-            "<small>Shutdown fortsätter automatiskt.</small>"
+            "<i>Waiting for download to complete...</i>\n"
+            "<small>Shutdown will continue automatically.</small>"
         )
         self.spinner.show()
         self.spinner.start()
@@ -160,8 +160,8 @@ class DownloadDialog(Gtk.Window):
 
         speed = measure_speed_mbit(iface)
         self.status_label.set_markup(
-            f"<i>Aktuell hastighet: {speed:.1f} Mbit/s</i>\n"
-            "<small>Shutdown fortsätter när hastigheten sjunker.</small>"
+            f"<i>Current speed: {speed:.1f} Mbit/s</i>\n"
+             "<small>Shutdown continues when speed drops.</small>"
         )
 
         if speed < LOW_THRESHOLD_MBIT:

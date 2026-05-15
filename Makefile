@@ -1,13 +1,11 @@
 CC       = clang
 CFLAGS   = -O3 -Wall -Wextra -march=native -mtune=native -flto=thin
 PREFIX   = /usr
-LIBDIR   = $(PREFIX)/lib/nordix
+LIBDIR   = $(PREFIX)/lib/nordix/nordix-graceful-shutdown
 BINDIR   = $(PREFIX)/bin
 UNITDIR  = /etc/systemd/system
-
 DAEMON   = nordix-graceful-shutdown
 CLIENT   = nordix-shutdown-client
-
 POPUPS   = nordix-shutdown-scrub.py \
            nordix-shutdown-vm.py    \
            nordix-shutdown-download.py
@@ -17,21 +15,20 @@ POPUPS   = nordix-shutdown-scrub.py \
 all: $(DAEMON) $(CLIENT)
 
 $(DAEMON): $(DAEMON).c
-	$(CC) $(CFLAGS) -o $@ $<
+	$(CC) $(CFLAGS) -o $@ $
 
 $(CLIENT): $(CLIENT).c
-	$(CC) $(CFLAGS) -o $@ $<
+	$(CC) $(CFLAGS) -o $@ $
 
 clean:
 	rm -f $(DAEMON) $(CLIENT)
 
 install: all
-	install -Dm755 $(DAEMON)             $(DESTDIR)$(LIBDIR)/$(DAEMON)
-	install -Dm755 $(CLIENT)             $(DESTDIR)$(BINDIR)/$(CLIENT)
-	install -Dm755 $(POPUPS:%=$(DESTDIR)$(LIBDIR)/%) || true
-	$(foreach p,$(POPUPS),install -Dm644 $(p) $(DESTDIR)$(LIBDIR)/$(p);)
-	install -Dm644 $(DAEMON).service     $(DESTDIR)$(UNITDIR)/$(DAEMON).service
-	install -Dm644 $(DAEMON).socket      $(DESTDIR)$(UNITDIR)/$(DAEMON).socket
+	install -Dm755 $(DAEMON)         $(DESTDIR)$(LIBDIR)/$(DAEMON)
+	install -Dm755 $(CLIENT)         $(DESTDIR)$(BINDIR)/$(CLIENT)
+	$(foreach p,$(POPUPS),install -Dm755 $(p) $(DESTDIR)$(LIBDIR)/$(p);)
+	install -Dm644 $(DAEMON).service $(DESTDIR)$(UNITDIR)/$(DAEMON).service
+	install -Dm644 $(DAEMON).socket  $(DESTDIR)$(UNITDIR)/$(DAEMON).socket
 
 uninstall:
 	rm -f $(DESTDIR)$(LIBDIR)/$(DAEMON)

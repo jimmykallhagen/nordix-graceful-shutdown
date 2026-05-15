@@ -62,9 +62,9 @@ class ScrubTrimDialog(Gtk.Window):
 
         label = Gtk.Label()
         label.set_markup(
-            f"<big><b>ZFS {OPERATION} pågår</b></big>\n\n"
-            f"En ZFS <b>{OPERATION}</b> körs just nu.\n"
-            "Välj hur du vill fortsätta:"
+            f"<big><b>ZFS {OPERATION} in progress</b></big>\n\n"
+            f"A ZFS <b>{OPERATION}</b> is currently running.\n"
+             "Please choose how to proceed:"
         )
         label.set_line_wrap(True)
         label.set_justify(Gtk.Justification.CENTER)
@@ -83,16 +83,16 @@ class ScrubTrimDialog(Gtk.Window):
         btn_box.set_halign(Gtk.Align.CENTER)
         vbox.pack_end(btn_box, False, False, 0)
 
-        btn_wait = Gtk.Button(label=f"Vänta tills {OPERATION} är klar")
+        btn_wait = Gtk.Button(label=f"Wait until {OPERATION} is complete")
         btn_wait.get_style_context().add_class("suggested-action")
         btn_wait.connect("clicked", self.on_wait)
         btn_box.pack_start(btn_wait, False, False, 0)
 
-        btn_pause = Gtk.Button(label=f"Pausa {OPERATION}")
+        btn_pause = Gtk.Button(label=f"Pause {OPERATION}")
         btn_pause.connect("clicked", self.on_pause)
         btn_box.pack_start(btn_pause, False, False, 0)
 
-        btn_cancel = Gtk.Button(label="Avbryt shutdown")
+        btn_cancel = Gtk.Button(label="Cancel shutdown")
         btn_cancel.get_style_context().add_class("destructive-action")
         btn_cancel.connect("clicked", self.on_cancel)
         btn_box.pack_start(btn_cancel, False, False, 0)
@@ -104,8 +104,8 @@ class ScrubTrimDialog(Gtk.Window):
     def on_wait(self, _btn):
         """Wait for the operation to complete, then continue shutdown."""
         self.status_label.set_markup(
-            f"<i>Väntar på att {OPERATION} ska bli klar...</i>\n"
-            "<small>Shutdown fortsätter automatiskt.</small>"
+           f"<i>Waiting for {OPERATION} to complete...</i>\n"
+            "<small>Shutdown will continue automatically.</small>"
         )
         self.spinner.show()
         self.spinner.start()
@@ -151,8 +151,9 @@ class ScrubTrimDialog(Gtk.Window):
             print(f"Warning: could not pause {OPERATION}: {e}", file=sys.stderr)
 
         self.status_label.set_markup(
-            f"<i>{OPERATION.capitalize()} pausad.</i>\n"
-            "<small><b>OBS:</b> Du måste manuellt starta om detta vid nästa boot.</small>"
+            f"<i>{OPERATION.capitalize()} Paused.</i>\n"
+            "<small><b>NOTE:</b> You must manually restart this at the next boot.</small>"
+
         )
         self.result = 0
         GLib.timeout_add(1500, Gtk.main_quit)

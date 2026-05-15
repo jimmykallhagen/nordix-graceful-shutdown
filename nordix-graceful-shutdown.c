@@ -61,9 +61,9 @@
 #include <errno.h>
 
 /* ── paths to the popup helper scripts ── */
-#define POPUP_SCRUB_TRIM   "/usr/lib/nordix/nordix-shutdown-scrub.py"
-#define POPUP_VM           "/usr/lib/nordix/nordix-shutdown-vm.py"
-#define POPUP_DOWNLOAD     "/usr/lib/nordix/nordix-shutdown-download.py"
+#define POPUP_SCRUB_TRIM   "/usr/lib/nordix/nordix-graceful-shutdown/nordix-shutdown-scrub.py"
+#define POPUP_VM           "/usr/lib/nordix/nordix-graceful-shutdown/nordix-shutdown-vm.py"
+#define POPUP_DOWNLOAD     "/usr/lib/nordix/nordix-graceful-shutdown/nordix-shutdown-download.py"
 
 /* socket path – must match the .socket unit */
 #define SOCKET_PATH        "/run/nordix-graceful-shutdown.sock"

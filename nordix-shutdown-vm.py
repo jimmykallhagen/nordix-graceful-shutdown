@@ -47,7 +47,7 @@ def get_running_vms():
 
 class VMDialog(Gtk.Window):
     def __init__(self):
-        super().__init__(title="Nordix Shutdown")
+        super().__init__(title="Nordix Graceful Shutdown")
         self.set_default_size(480, 280)
         self.set_position(Gtk.WindowPosition.CENTER)
         self.set_resizable(False)
@@ -71,21 +71,21 @@ class VMDialog(Gtk.Window):
 
         # Header
         header = Gtk.Label()
-        header.set_markup("<big><b>Virtuella maskiner körs</b></big>")
+        header.set_markup("<big><b>Virtual machines are running</b></big>")
         vbox.pack_start(header, False, False, 0)
 
         # VM list
         if vms:
             vm_text = "\n".join(f"  • {vm}" for vm in vms)
         else:
-            vm_text = "  (kunde inte lista VM-namn)"
+            vm_text = "  (couldn't list VM names)"
 
         info = Gtk.Label()
         info.set_markup(
-            f"Följande VM:ar är igång:\n\n"
+            f"The following VMs are running:\n\n"
             f"<tt>{vm_text}</tt>\n\n"
-            "Stäng av dina VM:ar innan du fortsätter med shutdown.\n"
-            "Eller välj att fortsätta ändå (VM:ar stängs ej av graciöst)."
+            "Shut down your VMs before proceeding with shutdown.\n"
+            "Or choose to continue anyway (VMs will not be shut down gracefully)."
         )
         info.set_line_wrap(True)
         info.set_justify(Gtk.Justification.LEFT)
@@ -96,11 +96,11 @@ class VMDialog(Gtk.Window):
         btn_box.set_halign(Gtk.Align.CENTER)
         vbox.pack_end(btn_box, False, False, 0)
 
-        btn_continue = Gtk.Button(label="Fortsätt shutdown ändå")
+        btn_continue = Gtk.Button(label="Continue shutdown anyway")
         btn_continue.connect("clicked", self.on_continue)
         btn_box.pack_start(btn_continue, False, False, 0)
 
-        btn_cancel = Gtk.Button(label="Avbryt shutdown")
+        btn_cancel = Gtk.Button(label="Cancel shutdown")
         btn_cancel.get_style_context().add_class("destructive-action")
         btn_cancel.connect("clicked", self.on_cancel)
         btn_box.pack_start(btn_cancel, False, False, 0)
